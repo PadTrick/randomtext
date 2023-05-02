@@ -28,26 +28,26 @@ fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
         Ok(io::BufReader::new(file).lines())
     }
 
-fn main() {
-    //creating the Vector, where we store our lines into
-    let mut line_text_vector: Vec<String> = Vec::new();
-
-    //reading the file and storing each line into the vector
-    if let Ok(lines) = read_lines("games.txt") {
-        for line in lines {
-            if let Ok(line_text) = line {
-                line_text_vector.push(line_text);
-            }
-        }
-    }
-
+fn create_random_number(lines: usize) -> usize {
     //generating a random number between Zero and the Vector Length
     let mut rng = thread_rng();
-    let random_number: usize = rng.gen_range(0..line_text_vector.len());
+    let random_number: usize = rng.gen_range(0..lines);
+    random_number
+    }
 
-    //selecting the Vector Value with the generated random number
-    let vector_to_trim = line_text_vector.get(random_number);
+fn store_lines_into_vector() -> Vec<String>{
+    let mut line_text_vector: Vec<String> = Vec::new();
+        //reading the file and storing each line into the vector
+        if let Ok(lines) = read_lines("games.txt") {
+            for line in lines {
+                if let Ok(line_text) = line {
+                    line_text_vector.push(line_text);
+                }
+            }
+        }
+    return line_text_vector
+}
 
-    //trimming the vector and printing it
-    println!("{}", trimable_vector(vector_to_trim));
+fn main() {
+    println!("{}", trimable_vector(store_lines_into_vector().get(create_random_number(store_lines_into_vector().len()))));
 }
