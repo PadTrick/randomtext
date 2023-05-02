@@ -29,10 +29,10 @@ fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
     }
 
 fn main() {
-    //creating the Vector, where we store out lines into
+    //creating the Vector, where we store our lines into
     let mut line_text_vector: Vec<String> = Vec::new();
 
-    //reading the file and storing each line as a vector and
+    //reading the file and storing each line into the vector
     if let Ok(lines) = read_lines("games.txt") {
         for line in lines {
             if let Ok(line_text) = line {
